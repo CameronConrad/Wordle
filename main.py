@@ -31,6 +31,8 @@ class Game:
                     self.set_word(self.active_word, self.active_word_index)
                     self.active_word_index += 1
                     self.active_word = ""
+                elif event.key == pygame.K_BACKSPACE:
+                    self.active_word = self.active_word[:-1]
 
     def run(self):
         while True:
