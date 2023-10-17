@@ -25,7 +25,9 @@ class Game:
 
     def check_events(self):
         for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN:
+            if event.type == pygame.QUIT:
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
                 if event.unicode.isalpha() and len(self.active_word) < 5:
                     self.active_word += event.unicode.upper()
                 elif event.key == pygame.K_RETURN and len(self.active_word) == 5:
@@ -35,6 +37,7 @@ class Game:
                     self.active_word = ""
                 elif event.key == pygame.K_BACKSPACE:
                     self.active_word = self.active_word[:-1]
+
 
     def run(self):
         while True:
@@ -73,8 +76,13 @@ class Word(pygame.sprite.Group):
         self.word = ""
 
     def update(self):
+        last_index = 0
         for i, letter in enumerate(self.word):
             self.sprites()[i].set_letter(letter)
+            self.sprites()[i].update()
+            last_index += 1
+        for i in range(last_index, 5):
+            self.sprites()[i].set_letter("")
             self.sprites()[i].update()
     
     def draw(self, screen):
