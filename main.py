@@ -21,29 +21,21 @@ class Game:
         self.active_word_index = 0
         self.active_word = ""
 
+        self.clock = pygame.time.Clock()
+
     def check_events(self):
         for event in pygame.event.get():
-            if event.type == pygame.KEYDOWN:
-                if event.unicode.isalpha() and len(self.active_word) < 5:
-                    self.active_word += event.unicode.upper()
-                elif event.key == pygame.K_RETURN and len(self.active_word) == 5:
-                    self.logic.add_word(self.active_word)
-                    self.set_word(self.active_word, self.active_word_index)
-                    self.active_word_index += 1
-                    self.active_word = ""
-                elif event.key == pygame.K_BACKSPACE:
-                    self.active_word = self.active_word[:-1]
+            if event.type == pygame.QUIT:
+                sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_a:
+                    print("a has been pressed")        
 
     def run(self):
         while True:
-
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
+            self.check_events()
 
             self.screen.fill((255, 255, 255))
-            
-            self.check_events()
 
             self.set_word(self.active_word, self.active_word_index)
 
