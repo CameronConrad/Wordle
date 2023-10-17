@@ -25,11 +25,16 @@ class Game:
 
     def check_events(self):
         for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                sys.exit()
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_a:
-                    print("a has been pressed")        
+            if event.type == pygame.KEYDOWN:
+                if event.unicode.isalpha() and len(self.active_word) < 5:
+                    self.active_word += event.unicode.upper()
+                elif event.key == pygame.K_RETURN and len(self.active_word) == 5:
+                    self.logic.add_word(self.active_word)
+                    self.set_word(self.active_word, self.active_word_index)
+                    self.active_word_index += 1
+                    self.active_word = ""
+                elif event.key == pygame.K_BACKSPACE:
+                    self.active_word = self.active_word[:-1]
 
     def run(self):
         while True:
