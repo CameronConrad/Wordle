@@ -1,9 +1,18 @@
+import random
+
 class Logic:
     def __init__(self):
         self.words = []
         self.colors = []
         self.answer = "WRATH"
         self.current_word = 0
+    
+    def get_answer(self):
+        # Load a random word from the valid-words.csv file
+        with open("valid-words.csv", "r") as file:
+            words = file.readlines()
+        word = random.choice(words)
+        return word.strip().upper()
     
     def add_word(self, word):
         self.words.append(word)
