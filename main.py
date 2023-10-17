@@ -33,6 +33,7 @@ class Game:
                 elif event.key == pygame.K_RETURN and len(self.active_word) == 5:
                     self.logic.add_word(self.active_word)
                     self.set_word(self.active_word, self.active_word_index)
+                    self.update_colors()
                     self.active_word_index += 1
                     self.active_word = ""
                 elif event.key == pygame.K_BACKSPACE:
@@ -57,7 +58,7 @@ class Game:
         for i, word in enumerate(self.logic.words):
             self.set_word(word, i)
             results = []
-            for color in self.logic.check_word():
+            for color in self.logic.check_word(i):
                 results.append(color_dict[color])
             self.set_colors(results, i)
     

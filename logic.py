@@ -9,12 +9,12 @@ class Logic:
         self.words.append(word)
         self.current_word = len(self.words) - 1
     
-    def check_word(self):
+    def check_word(self, index = -1):
         # Return the color for each letter based on the answer
         # If the letter is correct, return green (g)
         # If the letter is incorrect, but in the word, return yellow (y)
         # If the letter is incorrect and not in the word, return gray (n)
-        word = self.words[self.current_word]
+        word = self.words[index]
         colors = ["none", "none", "none", "none", "none"]
         for i, letter in enumerate(self.answer):
             if letter == word[i]:
