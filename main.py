@@ -63,7 +63,10 @@ class Game:
             self.set_colors(results, i)
     
     def set_word(self, word, index):
-        self.words[index].set_word(word)
+        try:
+            self.words[index].set_word(word)
+        except IndexError:
+            print(f"The word was {self.logic.answer}")
     
     def set_colors(self, colors: list, index):
         self.words[index].set_colors(colors)

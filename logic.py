@@ -4,7 +4,7 @@ class Logic:
     def __init__(self):
         self.words = []
         self.colors = []
-        self.answer = "WRATH"
+        self.answer = self.get_answer()
         self.current_word = 0
     
     def get_answer(self):
