@@ -2,6 +2,17 @@
 
 This is a Wordle clone. It selects a random word from a csv file of valid Wordle words and has the user attempt to guess the word
 
+## Setup
+
+To create a python virtual environment, run:
+```
+python3 -m venv <environment-name>
+source <environment-name>/bin/activate # Linux/MacOs
+<environment-name>/Scripts/activate.bat # Windows Terminal
+pip install pygame
+python3 main.py
+```
+
 ## GUI
 
 This program uses the Pygame module for its graphical user interface. 6 rows of tiles with 5 tiles in each row are displayed on the screen. The user types a word, which is displayed in the tiles. The BACKSPACE key can be used to delete letters. When the word has been typed, the user can press RETURN to move to the next line. When this is done, the recently completed row displays colors for each of its tiles. 

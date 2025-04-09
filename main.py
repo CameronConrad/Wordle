@@ -17,7 +17,7 @@ class Game:
         self.words = []
         for i in range(0, 6):
             self.words.append(Word(50, 50 + i*60))
-        
+
         self.active_word_index = 0
         self.active_word = ""
 
@@ -39,7 +39,6 @@ class Game:
                 elif event.key == pygame.K_BACKSPACE:
                     self.active_word = self.active_word[:-1]
 
-
     def run(self):
         while True:
             self.check_events()
@@ -53,7 +52,7 @@ class Game:
                 word.draw(self.screen)
 
             pygame.display.flip()
-    
+
     def update_colors(self):
         for i, word in enumerate(self.logic.words):
             self.set_word(word, i)
@@ -61,13 +60,13 @@ class Game:
             for color in self.logic.check_word(i):
                 results.append(color_dict[color])
             self.set_colors(results, i)
-    
+
     def set_word(self, word, index):
         try:
             self.words[index].set_word(word)
         except IndexError:
             print(f"The word was {self.logic.answer}")
-    
+
     def set_colors(self, colors: list, index):
         self.words[index].set_colors(colors)
 
@@ -88,20 +87,21 @@ class Word(pygame.sprite.Group):
         for i in range(last_index, 5):
             self.sprites()[i].set_letter("")
             self.sprites()[i].update()
-    
+
     def draw(self, screen):
         for sprite in self.sprites():
             sprite.draw(screen)
 
     def set_word(self, word):
-        self.word = word 
-    
+        self.word = word
+
     def set_colors(self, colors: list):
         for i, color in enumerate(colors):
             self.sprites()[i].set_fill(color)
 
+
 class Tile(pygame.sprite.Sprite):
-    def __init__(self,width,height,x,y):
+    def __init__(self, width, height, x, y):
         super().__init__()
 
         self.image = pygame.Surface((width, height))
@@ -112,23 +112,26 @@ class Tile(pygame.sprite.Sprite):
         self.rect.y = y
 
         self.letter = ""
-        self.text = pygame.font.SysFont("Arial", 20).render(self.letter, True, (0, 0, 0))
+        self.text = pygame.font.SysFont("Arial", 20).render(
+            self.letter, True, (0, 0, 0))
         self.text_rect = self.text.get_rect()
-    
+
     def update(self):
         self.letter = self.letter.upper()
-        self.text = pygame.font.SysFont("Arial", 20).render(self.letter, True, (0, 0, 0))
+        self.text = pygame.font.SysFont("Arial", 20).render(
+            self.letter, True, (0, 0, 0))
         self.text_rect.center = (self.rect.centerx-5, self.rect.centery)
-    
+
     def draw(self, screen):
         screen.blit(self.image, self.rect)
-        screen.blit(self.text,self.text_rect)
-    
+        screen.blit(self.text, self.text_rect)
+
     def set_letter(self, letter):
         self.letter = letter
-    def set_fill(self,color):
+
+    def set_fill(self, color):
         self.image.fill(color)
-        
+
 
 if __name__ == '__main__':
     game = Game()
